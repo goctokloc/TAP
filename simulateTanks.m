@@ -55,7 +55,7 @@ for k =tauc/dt+2:m_size
     %Linear model
 
     x1_lin(i,k)=(u1_d+u2_d+v1_d-a*(x1_d./C)^0.25)*dt+x1_d+dt*(u1(k-1)-u1_d)...
-        +dt*(u2(k-1)-u2_d)+dt*(v1(k-1)-v1_d)+(-a*dt*((x1_d/0.3)^0.25)/(4*x1_d)+1)*(x1_lin(i,k-1)-x1_d);
+        +dt*(u2(k-1)-u2_d)+dt*(v1(k-1)-v1_d)+(-a*dt*((x1_d/C)^0.25)/(4*x1_d)+1)*(x1_lin(i,k-1)-x1_d);
     x1_lin=round(x1_lin,2);
     
     x2_lin(i,k)=((u1_d*Th+u2_d*Tc+v1_d*Td-(u1_d+u2_d+v1_d)*x2_d)/x1_d)*dt+x2_d...
@@ -151,9 +151,33 @@ title ("Przebiegi zmiennej stanu x_{2} modelu linowego i nieliniowego dla ró¿nyc
 % print(gcf,"./fig/x2" + " u1=" + num2str(u1(1)) + " u2=" + num2str(u2(1)) + " dt=" + num2str(dt)+".emf" , '-dmeta')
 
 
-%print(gcf,'./fig/dane_ucz', '-dmeta')
 
 
+%% State space and Transfer functions
 
+%Continuous model
+
+A_matrix=[(-a*((x1_d/C)^0.25)/(4*x1_d)),0;...
+    (-(1/x1_d^2)*(u1_d*Th+u2_d*Tc+v1_d*Td-(u1_d+u2_d+v1_d)*x2_d)),(-(dt/x1_d)*(u1_d+u2_d+v1_d))];
+
+B_matrix=[1,1,1;(Th/x1_d-x2_d/x1_d),(Tc/x1_d-x2_d/x1_d),(Td/x1_d-x2_d/x1_d)];
+
+C_matrix=[round((1/(2*sqrt(x1_d*C))),2), 0; 0, 1];
+
+D_matrix=zeros(2,3);
+    
+state_space_model=ss(A_matrix,B_matrix,C_matrix,D_matrix);
+
+state_space_model.InputDelay=[0;tauc;0];
+state_space_model.OutputDelay=[0;tau];
+
+transfer_function = tf(state_space_model)  %#ok<NOPTS>
+
+
+%Discrete model
+
+discrete_state_space_model=c2d(state_space_model,dt);
+
+discrete_transfer_function=tf(discrete_state_space_model)  %#ok<NOPTS>
 
 
