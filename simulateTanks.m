@@ -2,7 +2,7 @@
 clc
 clearvars
 simlength=500;
-dt=1;
+dt=0.1;
 m_size=simlength/dt;
 
 %constants
@@ -44,11 +44,11 @@ legends = cell(size(u_jumps));
 for i=1:size(u_jumps,2)
 
 %setting inputs    
-u1=1*Fh*ones(1,m_size);
+u1=u_jumps(i)*Fh*ones(1,m_size);
 u2=u_jumps(i)*Fc*ones(1,m_size);
-v1=Fd*ones(1,m_size);
+v1=u_jumps(i)*Fd*ones(1,m_size);
 
-legends{i} = "u_{1} = " + num2str(u1(1)) + " u_{2} = " + num2str(u2(1));
+legends{i} = "u_{1} = " + num2str(u1(1)) + " u_{2} = " + num2str(u2(1)) + " v_{1} = " + num2str(v1(1));
     
 for k =tauc/dt+2:m_size
     
@@ -124,7 +124,8 @@ legend(legends, 'Location', 'EastOutside')
 xlabel("t [s]")
 ylabel("y_{1}")
 title ("Przebiegi wyjœcia y_{1} modelu linowego i nieliniowego dla ró¿nych skoków sterowania")
-% print(gcf,"./fig/y1" + " u1=" + num2str(u1(1)) + " u2=" + num2str(u2(1))+ " dt=" + num2str(dt)+".emf" , '-dmeta')
+set(gcf,'WindowState','fullscreen')
+print(gcf,"./fig/y1" + "_u1=" + num2str(u1(1)) + "_u2=" + num2str(u2(1)) + "_v1=" + num2str(v1(1)) + "_dt=" + num2str(dt)+".eps" , '-depsc')
 
 figure(2)
 grid on
@@ -132,7 +133,8 @@ legend(legends, 'Location', 'EastOutside')
 xlabel("t [s]")
 ylabel("y_{2}")
 title ("Przebiegi wyjœcia y_{2} modelu linowego i nieliniowego dla ró¿nych skoków sterowania")
-% print(gcf,"./fig/y2" + " u1=" + num2str(u1(1)) + " u2=" + num2str(u2(1))+ " dt=" + num2str(dt)+".emf" , '-dmeta')
+set(gcf,'WindowState','fullscreen')
+print(gcf,"./fig/y2" + "_u1=" + num2str(u1(1)) + "_u2=" + num2str(u2(1)) + "_v1=" + num2str(v1(1)) + "_dt=" + num2str(dt)+".eps" , '-depsc')
 
 figure(3)
 grid on
@@ -140,7 +142,8 @@ legend(legends, 'Location', 'EastOutside')
 xlabel("t [s]")
 ylabel("x_{1}")
 title ("Przebiegi zmiennej stanu x_{1} modelu linowego i nieliniowego dla ró¿nych skoków sterowania")
-% print(gcf,"./fig/x1" + " u1=" + num2str(u1(1)) + " u2=" + num2str(u2(1))+ " dt=" + num2str(dt)+".emf" , '-dmeta')
+set(gcf,'WindowState','fullscreen')
+print(gcf,"./fig/x1" + "_u1=" + num2str(u1(1)) + "_u2=" + num2str(u2(1)) + "_v1=" + num2str(v1(1)) + "_dt=" + num2str(dt)+".eps" , '-depsc')
 
 figure(4)
 grid on
@@ -148,7 +151,8 @@ legend(legends, 'Location', 'EastOutside')
 xlabel("t [s]")
 ylabel("x_{2}")
 title ("Przebiegi zmiennej stanu x_{2} modelu linowego i nieliniowego dla ró¿nych skoków sterowania")
-% print(gcf,"./fig/x2" + " u1=" + num2str(u1(1)) + " u2=" + num2str(u2(1)) + " dt=" + num2str(dt)+".emf" , '-dmeta')
+set(gcf,'WindowState','fullscreen')
+print(gcf,"./fig/x2" + "_u1=" + num2str(u1(1)) + "_u2=" + num2str(u2(1)) + "_v1=" + num2str(v1(1)) + "_dt=" + num2str(dt)+".eps" , '-depsc')
 
 
 
