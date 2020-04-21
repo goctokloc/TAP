@@ -1,0 +1,54 @@
+\section{Symulacja działania obiektu w Matlabie}
+
+\subsection{Otrzymany model}
+Opsiany jest następującywmi równaniami
+
+  \[  \left\{ \begin{array}{ll}
+ \frac{dV}{dt}=F_H + F_C + F_D - F(h)\\
+V\frac{dT}{dt}=F_H \cdot T_H + F_C \cdot T_C + F_D \cdot T_D -(F_H + F_C + F_D)\cdot T\\
+F(h)=\alpha \sqrt{h}, V(h)=C\cdot h^2, T_{out}(t)=T(t-\tau), F_C(t)=F_{Cin}(t-\tau_c)
+\end{array} \right. \]
+\\
+gdzie:
+\newline
+C=0,3\\
+\(\alpha=9\)\\
+\newline Punkt pracy zadanego układu:
+\(T_C=20\degree C\)\\
+\(T_H=65\degree C\)\\
+\(T_D=30\degree C\)\\
+\(F_C=31cm^3/s\)\\
+\(F_H=20cm^3/s\)\\
+\(F_D=10cm^3/s\)\\
+\(\tau_c=100 s\)\\
+\(\tau=40 s\)\\
+\(\tau_c=45,94 cm\)\\
+\(T=36,39\degree C\)\\
+\newline Wielkości regulowane: h, \(T_out\)
+\newline Wielkości sterujące: \(F_H, F_Cin\)\\
+\newline Z otrzymanych danych wynika, że:\\
+%MOZE DAJ BOLDY BY WIDAC ZE TO WEKTORY a moze i gorzej to wyglada nwm - jest git
+
+\newline \(\textbf{x}=\begin{bmatrix}
+V\\
+T 
+\end{bmatrix}=\begin{bmatrix}
+x_1\\
+x_2
+\end{bmatrix}\), \(\textbf{u}=\begin{bmatrix}
+F_H\\
+F_{Cin} 
+\end{bmatrix}=\begin{bmatrix}
+u_1\\
+u_2
+\end{bmatrix}\), \(\textbf{v}=F_d=v_1\), \(\textbf{y}=\begin{bmatrix}
+h\\
+T_out 
+\end{bmatrix}=\begin{bmatrix}
+y_1\\
+y_2
+\end{bmatrix}\)
+
+
+
+

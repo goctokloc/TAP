@@ -1,0 +1,58 @@
+\section{Modele zlinearyzowane (ciągły w postaci równań stanu i transmitancji) w punkcie pracy}
+
+Dokonano linearyzacji w punkcie $p(\overline{u_1}, \overline{u_2}, \overline{x_1}, \overline{x_2}, \overline{v_1})\\$
+
+
+
+
+
+\subsection{Równania stanu}
+Ogólny wzór równań kształtuje się następująco:\\
+\(\dot{x}=\textbf{A}\textbf{x}+\textbf{B}(\textbf{u}+\textbf{v)}\)\\
+\(\dot{y}=\textbf{C}\textbf{x}+\textbf{D}\textbf{u}\)\\
+\newline Mając równania:\\
+\(\dot{x}_1=u_1+u_2(t-\tau_c)+v_1-\alpha \sqrt[4]{\frac{x_1}{c}}\)\\
+\(\dot{x}_2=\frac{T_H u_1+T_C u_2(t-\tau_C)+T_D v_1-(u_1+u_2(t-\tau_C)+v_1)x_2}{x_1}\)\\
+\(y_1=\sqrt{\frac{x_1}{C}}\)\\
+\(y_2=x_2(t-\tau)\)\\
+\newline Po zlinearyzowaniu otrzymano:\\
+ \(\dot{x}_1=u_1+u_2(t-\tau_C)+v_1-\alpha \frac{(\frac{\overline{x}_1}{C})^{0,25}}{4\overline{x}_1}\)\\
+\(\dot{x}_2=(\frac{T_H}{\overline{x}_1}-\frac{\overline{x}_2}{\overline{x}_1})u_1+(\frac{T_C}{\overline{x}_1}-\frac{\overline{x}_2}{\overline{x}_1})u_2+(\frac{T_D}{\overline{x}_1}-\frac{\overline{x}_2}{\overline{x}_1})v_1-(\overline{u}_1+\overline{u}_2+\overline{v}_1)\overline{x}_2-\frac{1}{{\overline{x}_1}^2}(T_H\overline{u}_1+T_C\overline{u}_2+T_d\overline{v}_1-(\overline{u}_1+\overline{u}_2+\overline{v}_1)\overline{x}_2)x_1\)\\
+\(y_1=\sqrt{\frac{\overline{x}_1}{c}}+\frac{1}{2\sqrt{\overline{x}_1 C}}(x_1-\overline{x}_1)\)\\
+\(y_2=x_2(t-\tau)\)\\
+\newline Macierze stanu wyglądają następująco:\\
+
+\(\textbf{A}=\begin{bmatrix}
+-\alpha \frac{(\frac{\overline{x}_1}{C})^{0,25}}{4\overline{x}_1} & 0\\
+-\frac{1}{{\overline{x}_1}^2}(T_H\overline{u}_1+T_C\overline{u}_2+T_d\overline{v}_1-(\overline{u}_1+\overline{u}_2+\overline{v}_1)\overline{x}_2) & \frac{1}{\overline{x}_1(\overline{u}_1+\overline{u}_2)}
+\end{bmatrix}\)
+
+\(\textbf{B}=\begin{bmatrix}
+1 & 1 & 1\\
+\frac{T_H}{\overline{x}_1}-\frac{\overline{x}_2}{\overline{x}_1} & \frac{T_C}{\overline{x}_1}-\frac{\overline{x}_2}{\overline{x}_1} & \frac{T_D}{\overline{x}_1}-\frac{\overline{x}_2}{\overline{x}_1}
+\end{bmatrix}\)\\
+
+\(\textbf{C}=\begin{bmatrix}
+\frac{1}{2\sqrt{\overline{x}_1C}} & 0\\
+0 & 1
+\end{bmatrix}\) \(\textbf{D}=\begin{bmatrix}
+0 & 0 & 0\\
+0 & 0 & 0
+\end{bmatrix}\)\\
+
+
+
+\newpage
+\subsection{Transmitancje}
+
+Po zapisaniu macierzy A, B, C, D najpierw w Matlabie stworzono obiekt reprezentujący model za pomocą komendy \emph{ss()} a następnie wyznaczono transmitancje za pomocą komendy \emph{tf()}. Wyliczono następujące transmitancje:
+ \begin{align*}
+\frac{U_1}{Y_1} &= \frac{0.04}{s + 0.02409} \\
+\frac{U_1}{Y_2} &= e^{-40*s} \cdot \frac{0.04519 s + 0.001088}{s^2 + 0.03372 s + 0.0002321} \\
+\frac{U_2}{Y_1} &= e^{-40*s}\frac{0.04}{s + 0.02409} \\
+\frac{U_2}{Y_2} &= e^{-140*s} \cdot \frac{-0.02589 s - 0.000624}{s^2 + 0.03372 s + 0.0002321} \\
+\frac{V_1}{Y_1} &= \frac{0.04}{s + 0.02409} \\
+\frac{V_1}{Y_2} &= e^{-40*s} \cdot \frac{-0.01009 s - 0.0002436}{s^2 + 0.03372 s + 0.0002321} \\
+ \end{align*}
+
+
